@@ -1,0 +1,108 @@
+<h2 *ngIf="!editMode">Création d'un client</h2>
+<h2 *ngIf="editMode">Modification d'un client</h2>
+
+<!--
+  1) Pour gérer un formulaire dans Angular, il suffit d'un formulaire classique
+  2) On peut déléguer la soumission du formulaire à une fonction avec (ngSubmit)
+  3) ngSubmit n'existe que dans le FormsModule qu'il faudra donc importer
+  4) Une approche non standard peut être de se servir de [(ngModel)] (le Two Way
+  databinding)
+  5) L'approche standard est plutôt le "Template Driven Form" :
+  5.1) On créé une référence de type ngForm sur le formulaire HTML
+  5.2) On enregistre les champs auprès du formulaire avec ngModel
+  5.3) On créé une référence de type ngModel sur les inputs qu'on veut suivre
+  5.4) On peut alors accéder à l'état et aux détails du ngForm ou des ngModel
+  pour afficher de la validation
+  5.5) Les différentes erreurs se trouvent la propriété .errors d'un ngModel
+ -->
+
+<form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      name="firstName"
+      required
+      minlength="3"
+      placeholder="Prénom"
+      ngModel
+      #firstName="ngModel"
+      [class.is-invalid]="
+        firstName.errors && (firstName.touched || clientForm.submitted)
+      "
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="firstName.errors && (firstName.touched || clientForm.submitted)"
+    >
+      <span *ngIf="firstName.errors['required']"
+        >Le prénom est obligatoire</span
+      >
+      <span *ngIf="firstName.errors.minlength">
+        Le prénom doit contenir 3 caractères
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      name="lastName"
+      required
+      minlength="3"
+      placeholder="Nom de famille"
+      ngModel
+      #lastName="ngModel"
+      [class.is-invalid]="
+        lastName.errors && (lastName.touched || clientForm.submitted)
+      "
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="lastName.errors && (lastName.touched || clientForm.submitted)"
+    >
+      <span *ngIf="lastName.errors['required']">Le nom est obligatoire</span>
+      <span *ngIf="lastName.errors['minlength']">
+        Le nom doit contenir 3 caractères
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      placeholder="Votre adresse email"
+      ngModel
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      name="company"
+      required
+      minlength="2"
+      placeholder="Votre entreprise"
+      ngModel
+      #company="ngModel"
+      [class.is-invalid]="
+        company.errors && (company.touched || clientForm.submitted)
+      "
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="company.errors && (company.touched || clientForm.submitted)"
+    >
+      <span *ngIf="company.errors.required"
+        >Le nom de l'entreprise est obligatoire</span
+      >
+      <span *ngIf="company.errors.minlength">
+        Le nom de l'entreprise doit contenir 3 caractères
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
+  </div>
+</form>
