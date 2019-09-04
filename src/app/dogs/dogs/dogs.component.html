@@ -1,0 +1,33 @@
+<h2>Liste des dogs</h2>
+
+<a routerLink="/dogs/new" class="btn btn-primary">Créer un dog</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Breed</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dog of dogs">
+      <td>{{ dog.id }}</td>
+      <td>
+        <a routerLink="/dogs/{{ dog.id }}">
+          {{ dog.name }}
+        </a>
+      </td>
+      <td>{{ dog.breed }}</td>
+      <td>
+        <a routerLink="/dogs/{{ dog.id }}" class="btn btn-primary btn-sm mr-1">
+          Modifier
+        </a>
+        <button class="btn btn-danger btn-sm mr-1" (click)="handleDelete(dog)">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

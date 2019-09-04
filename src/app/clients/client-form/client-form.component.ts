@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./client-form.component.scss"]
 })
 export class ClientFormComponent implements OnInit {
-  editMode = true;
+  client;
 
   constructor(
     private service: ClientsService,
@@ -20,18 +20,29 @@ export class ClientFormComponent implements OnInit {
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get("id");
 
-    if (id === "new") {
-      this.editMode = false;
+    if (id !== "new") {
+      // Aller récupérer le client (donc appeler le service)
+      this.client = this.service.getClient(+id);
     }
   }
 
+  // FONCTION QUI S'EXECUTE À LA SOUMISSION DU FORMULAIRE
   onSubmit(form: NgForm) {
-    if (form.valid) {
+    if (form.invalid) {
+      return false;
+    }
+
+    if (this.client) {
+      //  UPDATE
+      const updatedClient = { ...this.client, ...form.value };
+      this.service.updateClient(updatedClient);
+    } else {
+      // CREATE
       // 1. Appeler le service qui gère les clients pour ajouter ce nouveau client
       this.service.addClient(form.value);
-
-      // 2. Rediriger sur la liste des clients
-      this.router.navigateByUrl("/clients");
     }
+
+    // 2. Rediriger sur la liste des clients
+    this.router.navigateByUrl("/clients");
   }
 }

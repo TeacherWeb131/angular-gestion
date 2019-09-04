@@ -1,5 +1,7 @@
 <h1>Liste des clients</h1>
 <a routerLink="/clients/new" class="btn btn-primary">Ajouter un client</a>
+<a routerLink="/chaises" class="btn btn-success ml-2">Liste des produits</a>
+<a routerLink="/dogs" class="btn btn-warning ml-2">Liste des dogs</a>
 <b-container>
   <b-table class="table-hover">
     <tr class="b-head">
@@ -12,9 +14,11 @@
     <tr class="b-body" *ngFor="let client of clients">
       <td>{{ client.id }}</td>
       <td>{{ client.firstName }} {{ client.lastName }}</td>
-      <b-badge color="danger">
-        {{ client.invoices }}
-      </b-badge>
+      <td>
+        <b-badge color="danger">
+          {{ client.invoices }}
+        </b-badge>
+      </td>
       <td>
         {{ client.totalAmount | currency: "EUR":"symbol":"1.2-2":"fr" }}
       </td>

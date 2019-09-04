@@ -72,10 +72,18 @@ export class ClientsService {
 
   constructor() {}
 
+  // Récupérer tous les clients
   public getClients() {
     return this.clients.slice();
   }
 
+  // Récupérer un seul client en fonction de son id
+  // Je vais chercher le client qui à l'id égal a l'id que je lui passe en paramètre
+  public getClient(id: number) {
+    return this.clients.find(client => client.id === id);
+  }
+
+  // Ajouter un client
   public addClient(client) {
     client.id = new Date().getTime();
     client.invoices = 0;
@@ -84,5 +92,18 @@ export class ClientsService {
     this.clients.push(client);
 
     console.log("Nouveau client : ", client);
+  }
+
+  // Modifier un client
+  public updateClient(client) {
+    // 1. Trouver l'index du client dans le tableau
+    const index = this.clients.findIndex(c => c.id === client.id);
+
+    // 2. Remplcaer l'élément qui se trouve à l'index
+    if (index >= 0) {
+      this.clients[index] = client;
+      return true;
+    }
+    return false;
   }
 }
