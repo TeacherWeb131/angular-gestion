@@ -1,0 +1,40 @@
+<h2>{{ car ? "Modification de la voiture" : "Création d'une voiture" }}</h2>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      [class.is-invalid]="
+        (form.get('marque').hasError('required') ||
+          form.get('marque').hasError('minlength')) &&
+        form.get('marque').dirty
+      "
+      placeholder="Marque de la voiture"
+      formControlName="marque"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      formControlName="modele"
+      type="text"
+      class="form-control"
+      placeholder="Modèle de la voiture"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      formControlName="age"
+      type="text"
+      class="form-control"
+      placeholder="Age de la voiture"
+    />
+  </div>
+  <div class="form-group">
+    <label>La voiture est-elle en vente ?</label>
+    <select class="form-control" formControlName="enVente">
+      <option [ngValue]="true" [defaultSelected]="true">Oui</option>
+      <option [ngValue]="false">Non</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>

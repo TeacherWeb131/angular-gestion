@@ -1,17 +1,17 @@
 import { Injectable } from "@angular/core";
 import { Chaise } from "./chaise";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, of } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
 })
 export class ChaisesService {
-  chaises: Chaise[] = [
-    { id: 1, name: "chaise en bois", price: 10 },
-    { id: 2, name: "chaise en fer", price: 30 },
-    { id: 3, name: "chaise en plastique", price: 5 }
-  ];
+  // chaises: Chaise[] = [
+  //   { id: 1, name: "chaise en bois", price: 10 },
+  //   { id: 2, name: "chaise en fer", price: 30 },
+  //   { id: 3, name: "chaise en plastique", price: 5 }
+  // ];
 
   constructor(private http: HttpClient) {}
 
@@ -27,6 +27,7 @@ export class ChaisesService {
     );
   }
 
+  // A FAIRE !!!
   createChaise(chaise: Chaise): Observable<boolean> {
     chaise.id = new Date().getTime();
     this.chaises.push(chaise);

@@ -48,7 +48,6 @@ export class ChaisesComponent implements OnInit {
   constructor(private service: ChaisesService) {}
 
   ngOnInit() {
-    // this.chaises = this.service.getChaises();
     this.service
       .getChaises()
       .subscribe((chaises: Chaise[]) => (this.chaises = chaises));

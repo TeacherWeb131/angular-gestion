@@ -1,0 +1,85 @@
+<!-- 
+    1. Les...
+ -->
+<h3>Ajouter un arbre à la foundation "Sauver les forêts"</h3>
+{{ arbreform.value | json }}
+<form [formGroup]="arbreform" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <input
+      formControlName="espece"
+      type="text"
+      class="form-control"
+      placeholder="Espece de l'arbre"
+    />
+    <p *ngIf="hasError('espece', 'required')">
+      L'espèce est obligatoire
+    </p>
+    <p *ngIf="hasError('espece', 'minlength')">
+      L'espèce doit avoir
+      {{ getError("espece", "minlength").requiredLength }}
+      caractères au minimum
+    </p>
+  </div>
+
+  <div formGroupName="details">
+    <div class="form-group">
+      <input
+        formControlName="age"
+        type="number"
+        class="form-control"
+        placeholder="Age de l'arbre"
+      />
+    </div>
+
+    <div class="form-group">
+      <input
+        formControlName="taille"
+        type="number"
+        class="form-control"
+        placeholder="Taille de l'arbre"
+      />
+    </div>
+  </div>
+  <h4>Donateurs de l'arbre</h4>
+  <div formArrayName="donateurs">
+    <!-- ngFor génère automatiquement une propriété index que je peux utiliser -->
+    <div
+      class="row"
+      *ngFor="
+        let donateur of arbreform.get('donateurs').controls;
+        let i = index
+      "
+      [formGroupName]="i"
+    >
+      <div class="col-5">
+        <input
+          type="text"
+          formControlName="prenom"
+          placeholder="Prénom du donateur"
+          class="form-control"
+        />
+      </div>
+      <div class="col-5">
+        <input
+          type="text"
+          formControlName="nom"
+          placeholder="Nom du donateur"
+          class="form-control"
+        />
+      </div>
+      <div class="col">
+        <button class="btn btn-danger" (click)="handleDelete(i)">X</button>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <button class="btn btn-success" (click)="addDonateur()">
+        Ajouter un donateur
+      </button>
+    </div>
+  </div>
+
+  <hr />
+
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+</form>

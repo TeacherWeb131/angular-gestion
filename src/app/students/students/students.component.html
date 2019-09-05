@@ -1,0 +1,42 @@
+<h2>Liste des étudiants</h2>
+
+<a routerLink="/students/new" class="btn btn-primary">Créer un student</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Age</th>
+      <th>Founded</th>
+      <th>Avatar</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.id }}</td>
+      <td>{{ student.firstName }}</td>
+      <td>{{ student.lastName }}</td>
+      <td>{{ student.age }}</td>
+      <td>{{ student.funded }}</td>
+      <td>{{ student.avatar }}</td>
+      <td>
+        <a
+          routerLink="/students/{{ student.id }}"
+          class="btn btn-success btn-sm"
+        >
+          Modifier
+        </a>
+        <button
+          class="btn btn-danger btn-sm ml-2"
+          (click)="handleDelete(student)"
+        >
+          Supprimer
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

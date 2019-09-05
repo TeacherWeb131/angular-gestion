@@ -8,6 +8,12 @@ import { ChaisesComponent } from "./chaises/chaises.component";
 import { ChaiseFormComponent } from "./chaise-form/chaise-form.component";
 import { DogsComponent } from "./dogs/dogs/dogs.component";
 import { DogFormComponent } from "./dogs/dog-form/dog-form.component";
+import { StudentFormComponent } from "./students/student-form/student-form.component";
+import { StudentsComponent } from "./students/students/students.component";
+import { ArbreFormComponent } from "./arbre-form/arbre-form.component";
+import { StudentsModule } from "./students/students.module";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CarFormComponent } from "./car-form/car-form.component";
 
 const routes: Routes = [
   { path: "clients", component: ClientsComponent },
@@ -16,12 +22,21 @@ const routes: Routes = [
   { path: "chaises/:id", component: ChaiseFormComponent },
   { path: "dogs", component: DogsComponent },
   { path: "dogs/:id", component: DogFormComponent },
+  { path: "students/:id", component: StudentFormComponent },
+  { path: "students", component: StudentsComponent },
+  { path: "arbre", component: ArbreFormComponent },
+  { path: "car", component: CarFormComponent },
   { path: "", redirectTo: "/clients", pathMatch: "full" }
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule.forRoot(routes), ClientsModule],
+  declarations: [ArbreFormComponent, CarFormComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes),
+    ClientsModule,
+    ReactiveFormsModule
+  ],
   exports: [RouterModule]
 })
 export class RoutingModule {}
