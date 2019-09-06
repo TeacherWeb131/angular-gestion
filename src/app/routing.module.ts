@@ -11,9 +11,12 @@ import { DogFormComponent } from "./dogs/dog-form/dog-form.component";
 import { StudentFormComponent } from "./students/student-form/student-form.component";
 import { StudentsComponent } from "./students/students/students.component";
 import { ArbreFormComponent } from "./arbre-form/arbre-form.component";
-import { StudentsModule } from "./students/students.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CarFormComponent } from "./car-form/car-form.component";
+import { DashboardComponent } from "./students/dashboard/dashboard.component";
+import { DashboardDetailsComponent } from "./students/dashboard-details/dashboard-details.component";
+import { DashboardDetailsEditComponent } from "./students/dashboard-details-edit/dashboard-details-edit.component";
+import { StudentsModule } from "./students/students.module";
 
 const routes: Routes = [
   { path: "clients", component: ClientsComponent },
@@ -26,6 +29,14 @@ const routes: Routes = [
   { path: "students", component: StudentsComponent },
   { path: "arbre", component: ArbreFormComponent },
   { path: "car", component: CarFormComponent },
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    children: [
+      { path: ":id", component: DashboardDetailsComponent },
+      { path: ":id/edit", component: DashboardDetailsEditComponent }
+    ]
+  },
   { path: "", redirectTo: "/clients", pathMatch: "full" }
 ];
 
@@ -35,7 +46,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     ClientsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StudentsModule
   ],
   exports: [RouterModule]
 })

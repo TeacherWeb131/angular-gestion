@@ -1,0 +1,18 @@
+<h2>Dashboard des étudiants</h2>
+<p class="alert alert-success" *ngIf="message">{{ message }}</p>
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      <a
+        routerLink="/dashboard/{{ s.id }}"
+        class="list-group-item"
+        *ngFor="let s of students"
+      >
+        {{ s.firstName }} {{ s.lastName }}</a
+      >
+    </ul>
+  </div>
+  <div class="col-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>

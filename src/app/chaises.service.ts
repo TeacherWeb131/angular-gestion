@@ -30,7 +30,7 @@ export class ChaisesService {
   // A FAIRE !!!
   createChaise(chaise: Chaise): Observable<boolean> {
     chaise.id = new Date().getTime();
-    this.chaises.push(chaise);
+    // this.chaises.push(chaise);
 
     return of(true);
   }

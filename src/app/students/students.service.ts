@@ -1,12 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Student } from "./student";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class StudentsService {
+  // un Subject est un observable qui va emmettre un évènement
+  // quand on va l'activer (avec la methode next())
+  dataChanged = new Subject();
+
   constructor(private http: HttpClient) {}
 
   // Récupérer les students

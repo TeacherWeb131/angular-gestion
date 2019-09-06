@@ -14,8 +14,6 @@ import { FormsModule } from "@angular/forms";
 import { DogsComponent } from "./dogs/dogs/dogs.component";
 import { DogFormComponent } from "./dogs/dog-form/dog-form.component";
 import { HttpClientModule } from "@angular/common/http";
-import { StudentsComponent } from "./students/students/students.component";
-import { StudentFormComponent } from "./students/student-form/student-form.component";
 
 // 3 imports pour importer la devise locale (euro france)
 // the second parameter 'fr' is optional
@@ -27,9 +25,7 @@ registerLocaleData(localeFr, "fr");
     ChaisesComponent,
     ChaiseFormComponent,
     DogsComponent,
-    DogFormComponent,
-    StudentsComponent,
-    StudentFormComponent
+    DogFormComponent
   ],
   imports: [
     BrowserModule,

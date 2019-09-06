@@ -1,0 +1,49 @@
+<h3>Modification d'un étudiant</h3>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Prénom de l'étudiant"
+      formControlName="firstName"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nom de famille de l'étudiant"
+      formControlName="lastName"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Âge de l'étudiant"
+      formControlName="age"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="url"
+      class="form-control"
+      placeholder="URL de l'avatar"
+      formControlName="avatar"
+    />
+  </div>
+  <div class="form-group">
+    <label>
+      <input type="checkbox" formControlName="funded" /> Financement par
+      organisme
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-success float-right">
+    Enregistrer !
+  </button>
+
+  {{ form.value | json }}
+  <hr />
+  {{ student | json }}
+</form>
